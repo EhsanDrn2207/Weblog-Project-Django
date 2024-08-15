@@ -24,3 +24,9 @@ class BlogCreateView(generic.CreateView):
     template_name = "blogs/blog_create_page.html"
     context_object_name = "form"
 
+
+class BlogUpdateView(generic.UpdateView):
+    model = Blog
+    fields = ["title", "text", "author", "status"]
+    template_name = "blogs/blog_update_page.html"
+
