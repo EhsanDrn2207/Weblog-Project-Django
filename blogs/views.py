@@ -16,3 +16,11 @@ class BlogDetailView(generic.DetailView):
     model = Blog
     template_name = "blogs/blog_detail_page.html"
     context_object_name = "blog"
+
+
+class BlogCreateView(generic.CreateView):
+    model = Blog
+    fields = ["title", "text", "author", "status"]
+    template_name = "blogs/blog_create_page.html"
+    context_object_name = "form"
+
