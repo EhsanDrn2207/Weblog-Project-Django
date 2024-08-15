@@ -14,7 +14,7 @@
                             <p class="card-text py-3">
                                 {{ blog.text|truncatewords:15 }}
                             </p>
-                            <div class="btn btn-sm btn-success">Read More</div>
+                            <a href="{% url "blog_detail" blog.id %}"  class="btn btn-sm btn-success">Read More</a>
                         </div>
                     </div>
                 {% endfor %}
