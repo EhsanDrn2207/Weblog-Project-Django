@@ -124,3 +124,19 @@ class BlogTests(TestCase):
         self.assertEqual(Blog.objects.first().text, "text4")
         self.assertEqual(Blog.objects.first().author, self.user2)
         self.assertEqual(Blog.objects.first().status, "drf")
+
+    def test_blog_delete_url(self):
+        response = self.client.get(f"/blogs/{self.blog1.id}/delete/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_blog_delete_name(self):
+        response = self.client.get(reverse("blog_delete", args=[self.blog1.id]))
+        self.assertEqual(response.status_code, 200)
+
+    def test_blog_delete_template_used(self):
+        response = self.client.get(reverse("blog_delete", args=[self.blog1.id]))
+        self.assertTemplateUsed(response, "blogs/blog_delete_page.html")
+
+    def test_blog_delete_form(self):
+        response = self.client.post(path=reverse("blog_delete", args=[self.blog1.id]))
+        self.assertEqual(response.status_code, 302)
