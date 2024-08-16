@@ -140,3 +140,7 @@ class BlogTests(TestCase):
     def test_blog_delete_form(self):
         response = self.client.post(path=reverse("blog_delete", args=[self.blog1.id]))
         self.assertEqual(response.status_code, 302)
+
+    def test_404_not_found(self):
+        response = self.client.get(reverse("blog_detail", args=[999]))
+        self.assertEqual(response.status_code, 404)
