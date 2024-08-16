@@ -99,3 +99,28 @@ class BlogTests(TestCase):
         self.assertEqual(Blog.objects.last().text, "text3")
         self.assertEqual(Blog.objects.last().author, self.user1)
         self.assertEqual(Blog.objects.last().status, "pub")
+
+    def test_blog_update_url(self):
+        response = self.client.get(f"/blogs/{self.blog1.id}/edit/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_blog_update_name(self):
+        response = self.client.get(reverse("blog_update", args=[self.blog1.id]))
+        self.assertEqual(response.status_code, 200)
+
+    def test_blog_update_template_used(self):
+        response = self.client.get(reverse("blog_update", args=[self.blog1.id]))
+        self.assertTemplateUsed(response, "blogs/blog_update_page.html")
+
+    def test_blog_update_form(self):
+        response = self.client.post(path=reverse("blog_update", args=[self.blog1.id]), data={
+            "title": "title4",
+            "text": "text4",
+            "author": self.user2.id,
+            "status": "drf",
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Blog.objects.first().title, "title4")
+        self.assertEqual(Blog.objects.first().text, "text4")
+        self.assertEqual(Blog.objects.first().author, self.user2)
+        self.assertEqual(Blog.objects.first().status, "drf")
