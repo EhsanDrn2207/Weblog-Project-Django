@@ -74,3 +74,28 @@ class BlogTests(TestCase):
         self.assertContains(response2, self.blog2.title)
         self.assertContains(response2, self.blog2.text)
         self.assertContains(response2, self.blog2.author)
+
+    def test_blog_create_url(self):
+        response = self.client.get("/blogs/create/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_blog_create_name(self):
+        response = self.client.get(reverse("blog_create"))
+        self.assertEqual(response.status_code, 200)
+
+    def test_blog_create_template_used(self):
+        response = self.client.get(reverse("blog_create"))
+        self.assertTemplateUsed(response, "blogs/blog_create_page.html")
+
+    def test_blog_create_form(self):
+        response = self.client.post(path=reverse("blog_create"), data={
+            "title": "title3",
+            "text": "text3",
+            "author": self.user1.id,
+            "status": "pub",
+        })
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Blog.objects.last().title, "title3")
+        self.assertEqual(Blog.objects.last().text, "text3")
+        self.assertEqual(Blog.objects.last().author, self.user1)
+        self.assertEqual(Blog.objects.last().status, "pub")
