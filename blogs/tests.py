@@ -45,10 +45,32 @@ class BlogTests(TestCase):
         response = self.client.get(reverse("blog_list"))
         self.assertTemplateUsed(response, "blogs/blog_list_page.html")
 
-    def test_blog_list_component_view(self):
+    def test_blog_list_component(self):
         response = self.client.get(reverse("blog_list"))
         self.assertContains(response, self.blog1.title)
         self.assertContains(response, self.blog1.text)
         self.assertNotContains(response, self.blog2.title)
         self.assertNotContains(response, self.blog2.text)
 
+    def test_blog_detail_url(self):
+        response = self.client.get(f"/blogs/{self.blog1.id}/")
+        self.assertEqual(response.status_code, 200)
+
+    def test_blog_detail_name(self):
+        response = self.client.get(reverse("blog_detail", args=[self.blog1.id]))
+        self.assertEqual(response.status_code, 200)
+
+    def test_blog_detail_template_used(self):
+        response = self.client.get(reverse("blog_detail", args=[self.blog1.id]))
+        self.assertTemplateUsed(response, "blogs/blog_detail_page.html")
+
+    def test_blog_detail_component(self):
+        response = self.client.get(reverse("blog_detail", args=[self.blog1.id]))
+        self.assertContains(response, self.blog1.title)
+        self.assertContains(response, self.blog1.text)
+        self.assertContains(response, self.blog1.author)
+
+        response2 = self.client.get(reverse("blog_detail", args=[self.blog2.id]))
+        self.assertContains(response2, self.blog2.title)
+        self.assertContains(response2, self.blog2.text)
+        self.assertContains(response2, self.blog2.author)
