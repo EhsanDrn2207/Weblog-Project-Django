@@ -25,7 +25,24 @@
                 <a class="nav-link" href="{% url "blog_create" %}">Create</a>
             </div>
         </div>
-        <div class="mx-2 text-white">Welcome</div>
+        <div class="mx-2 text-white">
+            {% if user.is_authenticated %}
+                <form action="{% url "logout" %}" method="post">
+                    {% csrf_token %}
+                    <p> Welcome {{ user.username }}
+                        <span> | </span>
+                        <button type="submit" class="btn btn-primary">Logout</button>
+                    </p>
+                </form>
+
+            {% else %}
+                <p>
+                    <a href="{% url "login" %}" class="btn btn-primary">login</a>
+                    <span>|</span>
+                    <a href="{% url "signup" %}" class="btn btn-primary">Sign Up</a>
+                </p>
+            {% endif %}
+        </div>
     </div>
 </nav>
 

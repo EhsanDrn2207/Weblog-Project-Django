@@ -136,10 +136,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "accounts.CustomUserModel"
 
 # Login Config
-LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "blog_list"
 
 # Logout Config
-LOGOUT_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "blog_list"
 
 # Crispy Forms Config
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
