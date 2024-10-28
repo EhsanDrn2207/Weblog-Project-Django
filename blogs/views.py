@@ -53,7 +53,7 @@ class BlogCreateView(LoginRequiredMixin, generic.CreateView):
     context_object_name = "form"
 
 
-class BlogUpdateView(UserPassesTestMixin, LoginRequiredMixin, generic.UpdateView):
+class BlogUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Blog
     fields = ["title", "text", "author", "status"]
     template_name = "blogs/blog_update_page.html"
@@ -63,7 +63,7 @@ class BlogUpdateView(UserPassesTestMixin, LoginRequiredMixin, generic.UpdateView
         return obj.author == self.request.user
 
 
-class BlogDeleteView(UserPassesTestMixin, LoginRequiredMixin, generic.DeleteView):
+class BlogDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = Blog
     template_name = "blogs/blog_delete_page.html"
 
