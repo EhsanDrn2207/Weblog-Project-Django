@@ -16,7 +16,7 @@ class BlogListView(generic.ListView):
     paginate_by = 4
 
     def get_queryset(self):
-        return Blog.objects.filter(status='pub')
+        return Blog.objects.filter(status='pub').order_by("-modified_datetime")
 
 
 @login_required
