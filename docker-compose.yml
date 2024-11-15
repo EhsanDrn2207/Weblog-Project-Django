@@ -8,7 +8,11 @@ services:
       - .:/code  # Mounts current directory to /code inside the container
     ports:
       - 8000:8000  # Maps host port 8000 to container port 8000
-
+    depends_on:
+      - db
+    environment:
+      - "DJANGO_SECRET_KEY=django-insecure-of_+vynipen=e1y-a6iy0_pvuhbvgl+q&n*e#x=8v_x2+00*1o"
+      - "DJANGO_DEBUG=True"
 
   db:
     image: postgres:17
