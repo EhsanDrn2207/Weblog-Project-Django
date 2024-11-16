@@ -50,7 +50,7 @@ A **Django-based Weblog application** that allows users to create, read, update,
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/WEBLOG_PROJECT_DJANGO.git
+   git clone https://github.com/yourusername/Weblog-Project-Django.git
    cd blogs
    ```
 
