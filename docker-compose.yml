@@ -12,7 +12,7 @@ services:
       - db
     environment:
       - "DJANGO_SECRET_KEY=django-insecure-of_+vynipen=e1y-a6iy0_pvuhbvgl+q&n*e#x=8v_x2+00*1o"
-      - "DJANGO_DEBUG=False"
+      - "DJANGO_DEBUG=True"
 
   db:
     image: postgres:17
