@@ -64,7 +64,7 @@ Follow these steps to set up and run the project on your local machine.
 1. **Clone the repository**:
    ```bash
    git clone https://github.com/yourusername/Weblog-Project-Django.git
-   cd Weblog-Project-Django
+   cd blogs
    ```
 
 2. **Set up environment variables**:
